@@ -1,4 +1,4 @@
-let title = 10;
+const title = 10;
 let screens = 10;
 let screenPrice = 10;
 let rollback = 10;
