@@ -12,14 +12,12 @@ let service1;
 let service2;
 
 const isNumber = function (num) {
-  return !isNaN(parseFloat(num)) && isFinite(num);
+  return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
 };
 
 const asking = function () {
   title = prompt('Как называется ваш проект?', 'название-сайта');
   screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
-
-  screenPrice = +prompt('Сколько будет стоить данная работа?');
 
   do {
     screenPrice = +prompt('Сколько будет стоить данная работа?');
@@ -80,6 +78,7 @@ console.log(getRollbackMessage(fullPrice));
 console.log(title);
 console.log('Адаптив', adaptive);
 console.log(screens);
+console.log(screenPrice.lenght);
 console.log('Сумма дополнительных услуг ' + allServicePrices);
 console.log('Итоговая сумма ' + servicePercentPrice);
 console.log('Стоимость верстки экрана ' + screenPrice + ' юани ' + 'и' + ' Стоимость разработки сайта ' + fullPrice + ' юани');
