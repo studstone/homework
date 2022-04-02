@@ -5,11 +5,7 @@ let screens;
 let screenPrice;
 let adaptive;
 let rollback = 34;
-let allServicePrices;
-let fullPrice;
-let servicePercentPrice;
-let service1;
-let service2;
+
 
 const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
@@ -28,6 +24,8 @@ const asking = function () {
 
 const getAllServicePrices = function () {
   let sum = 0;
+  let service1;
+  let service2;
 
   for (let i = 0; i < 2; i++) {
 
@@ -69,9 +67,9 @@ const getRollbackMessage = function (price) {
 };
 
 asking();
-allServicePrices = getAllServicePrices();
-fullPrice = getFullPrice();
-servicePercentPrice = Math.ceil(getServicePercentPrices());
+const allServicePrices = getAllServicePrices();
+const fullPrice = getFullPrice();
+const servicePercentPrice = Math.ceil(getServicePercentPrices());
 title = getTitle();
 
 console.log(getRollbackMessage(fullPrice));
