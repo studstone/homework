@@ -1,6 +1,6 @@
 'use strict';
 
-let random = Math.ceil(Math.random() * 10);
+let random = Math.ceil(Math.random() * 100);
 console.log(random);
 const nameBot = alert('Загадывание случайного числа от 1 до 100');
 
