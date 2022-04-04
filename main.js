@@ -9,26 +9,27 @@ const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
 };
 
-const bot = function () {
+const botAsk = function () {
   let askNumber = prompt('Угадай число от 1 до 100');
 
-
-  if (askNumber) {
-    if (askNumber > random) {
-      alert('Загаданное число меньше');
-      bot();
-    } else if (askNumber < random) {
-      alert('Загаданное число больше');
-      bot();
-    } else if (!isNumber(askNumber)) {
-      alert('Введи число!');
-      bot();
+  const bot = function () {
+    if (askNumber) {
+      if (askNumber > random) {
+        alert('Загаданное число меньше');
+        botAsk();
+      } else if (askNumber < random) {
+        alert('Загаданное число больше');
+        botAsk();
+      } else if (!isNumber(askNumber)) {
+        alert('Введи число!');
+        botAsk();
+      } else {
+        alert('Поздравляю, Вы угадали!!!');
+      }
     } else {
-      alert('Поздравляю, Вы угадали!!!');
+      alert('Игра окончена');
     }
-  } else {
-    alert('Игра окончена');
-  }
-
+  };
+  bot();
 };
-bot();
+botAsk();
