@@ -9,27 +9,38 @@ const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
 };
 
+
 const botAsk = function () {
-  let askNumber = prompt('Угадай число от 1 до 100');
+  let attempts = 2;
+
 
   const bot = function () {
-    if (askNumber) {
-      if (askNumber > random) {
-        alert('Загаданное число меньше');
-        botAsk();
-      } else if (askNumber < random) {
-        alert('Загаданное число больше');
-        botAsk();
-      } else if (!isNumber(askNumber)) {
-        alert('Введи число!');
-        botAsk();
+    if (attempts > 0) {
+      let askNumber = prompt('Угадай число от 1 до 100');
+      if (askNumber) {
+        if (askNumber > random) {
+          --attempts;
+          alert('Загаданное число меньше, осталось попыток ' + attempts);
+          bot();
+        } else if (askNumber < random) {
+          --attempts;
+          alert('Загаданное число больше, осталось попыток ' + attempts);
+          bot();
+        } else if (!isNumber(askNumber)) {
+          --attempts;
+          alert('Введи число! Осталось попыток ' + attempts);
+          bot();
+        } else {
+          confirm('Вы угадали!!! Хотели бы сыграть еще?') ? botAsk() : alert('До свидания');
+        }
       } else {
-        alert('Поздравляю, Вы угадали!!!');
+        alert('Игра окончена');
       }
     } else {
-      alert('Игра окончена');
+      confirm('Попытки закончились, хотите сыграть еще ?') ? botAsk() : alert('До свидания');
     }
   };
+
   bot();
 };
 botAsk();
