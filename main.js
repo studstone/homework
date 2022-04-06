@@ -11,7 +11,7 @@ const isNumber = function (num) {
 
 
 const botAsk = function () {
-  let attempts = 2;
+  let attempts = 10;
 
 
   const bot = function () {
