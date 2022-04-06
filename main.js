@@ -79,5 +79,4 @@ const appData = {
   },
 
 };
-
 appData.start();
