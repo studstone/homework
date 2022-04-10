@@ -9,7 +9,7 @@ const appData = {
   allServicePrices: 0,
   fullPrice: 0,
   servicePercentPrice: 0,
-  services: {},
+  services: [],
 
   isNumber: function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
@@ -59,17 +59,31 @@ const appData = {
         price = +prompt('Сколько это будет стоить?');
       } while (!appData.isNumber(price));
 
-      appData.services[name] = price;
+      appData.services.push({
+        id: i,
+        name: name,
+        price: price
+      });
     }
+
   },
 
   addPrices: function () {
-    for (let screen of appData.screens) {
-      appData.screenPrice += screen.price;
-    }
-    for (let key in appData.services) {
-      appData.allServicePrices += appData.services[key];
-    }
+    // for (let screen of appData.screens) {
+    //   appData.screenPrice += screen.price;
+    // }
+
+    appData.screenPrice = appData.screens.reduce(function (sum, item) {
+      return sum + item.price;
+    }, 0);
+
+    // for (let service of appData.services) {
+    //   appData.allServicePrices += service.price;
+    // }
+
+    appData.allServicePrices = appData.services.reduce(function (sum, item) {
+      return sum + item.price;
+    }, 0);
   },
 
   getFullPrice: function () {
@@ -94,12 +108,10 @@ const appData = {
     }
   },
   loger: function () {
-    // for (let key in appData) {
-    //   console.log(key + ' ' + appData[key]);
-    // }
     console.log(appData.fullPrice);
     console.log(appData.servicePercentPrice);
     console.log(appData.screens);
+    console.log(appData.services);
   },
   start: function () {
     appData.asking();
