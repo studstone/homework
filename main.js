@@ -1,126 +1,34 @@
-'use strict';
-
-const appData = {
-  title: '',
-  screens: [],
-  screenPrice: 0,
-  adaptive: true,
-  rollback: 10,
-  allServicePrices: 0,
-  fullPrice: 0,
-  servicePercentPrice: 0,
-  services: [],
-
-  isNumber: function (num) {
-    return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0;
-  },
-
-  isString: function (str) {
-    return isNaN(str) && str !== 0;
-  },
-
-  asking: function () {
-    do {
-      appData.title = prompt('Как называется ваш проект?', 'название-сайта');
-    } while (!appData.isString(appData.title));
+const books = document.querySelectorAll('.books');
+const book = document.querySelectorAll('.book');
+const divAdv = document.querySelector('.adv');
+const body = document.querySelector('body');
+const bookLink = document.querySelectorAll('div>h2>a');
+const bookListSecond = book[0].querySelectorAll('ul>li');
+const bookListFifth = book[5].querySelectorAll('ul>li');
+const bookListSixth = book[2].querySelectorAll('ul>li');
+const newElement = document.createElement('li');
 
 
-    for (let i = 0; i < 2; i++) {
-      let name = '';
-      let price = 0;
+divAdv.remove();
 
-      do {
-        name = prompt('Какие типы экранов нужно разработать?');
-      } while (!appData.isString(name));
+book[0].before(book[1]);
+book[0].after(book[4]);
+book[4].after(book[3]);
+book[2].before(book[5]);
 
-      do {
-        price = +prompt('Сколько будет стоить данная работа?');
-      } while (!appData.isNumber(price));
+body.style.backgroundImage = 'url(./image/you-dont-know-js.jpg)';
 
-      appData.screens.push({
-        id: i,
-        name: name,
-        price: price
-      });
-    }
+bookLink[4].textContent = 'Книга 3. this и Прототипы Объектов';
 
+bookListSecond[1].after(bookListSecond[3]);
+bookListSecond[3].after(bookListSecond[6]);
+bookListSecond[6].after(bookListSecond[8]);
+bookListSecond[10].after(bookListSecond[2]);
 
-    appData.adaptive = confirm('Нужен ли адаптив на сайте?');
+bookListFifth[1].after(bookListFifth[9]);
+bookListFifth[9].after(bookListFifth[3]);
+bookListFifth[3].after(bookListFifth[4]);
+bookListFifth[8].before(bookListFifth[5]);
 
-    for (let i = 0; i < 2; i++) {
-      let name = '';
-      let price = 0;
-
-      do {
-        name = prompt('Какой дополнительный тип услуги нужен?');
-      } while (!appData.isString(name));
-
-      do {
-        price = +prompt('Сколько это будет стоить?');
-      } while (!appData.isNumber(price));
-
-      appData.services.push({
-        id: i,
-        name: name,
-        price: price
-      });
-    }
-
-  },
-
-  addPrices: function () {
-    // for (let screen of appData.screens) {
-    //   appData.screenPrice += screen.price;
-    // }
-
-    appData.screenPrice = appData.screens.reduce(function (sum, item) {
-      return sum + item.price;
-    }, 0);
-
-    // for (let service of appData.services) {
-    //   appData.allServicePrices += service.price;
-    // }
-
-    appData.allServicePrices = appData.services.reduce(function (sum, item) {
-      return sum + item.price;
-    }, 0);
-  },
-
-  getFullPrice: function () {
-    appData.fullPrice = appData.screenPrice + appData.allServicePrices;
-  },
-  getTitle: function () {
-    appData.title = appData.title.trim()[0].toUpperCase() + appData.title.trim().substring(1).toLowerCase();
-
-  },
-  getServicePercentPrices: function () {
-    appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
-  },
-  getRollbackMessage: function (price) {
-    if (price >= 30000) {
-      return "Даем скидку в 10 %";
-    } else if (price >= 15000 && price < 30000) {
-      return "Даем скидку в 5 %";
-    } else if (price >= 0 && price < 15000) {
-      return "Скидка не предусмотрена";
-    } else if (price < 0) {
-      return "Что то пошло не так";
-    }
-  },
-  loger: function () {
-    console.log(appData.fullPrice);
-    console.log(appData.servicePercentPrice);
-    console.log(appData.screens);
-    console.log(appData.services);
-  },
-  start: function () {
-    appData.asking();
-    appData.addPrices();
-    appData.getFullPrice();
-    Math.ceil(appData.getServicePercentPrices());
-    appData.getTitle();
-    appData.loger();
-  },
-
-};
-appData.start();
+newElement.textContent = 'Глава 8: За пределами ES6';
+bookListSixth[8].after(newElement);
