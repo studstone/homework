@@ -78,8 +78,6 @@ const appData = {
   disabledButton: function () {
     if (appData.validate()) {
       appData.start();
-    } else {
-      console.log('none');
     }
   },
   loger: function (event) {
@@ -110,8 +108,6 @@ const appData = {
       appData.count.push({
         amount: +input.value
       });
-      console.log(appData.screens);
-      console.log(appData.count);
     });
   },
   addServicec: function () {
@@ -186,5 +182,3 @@ const appData = {
   },
 
 };
-appData.init();
-console.log(appData.count);
