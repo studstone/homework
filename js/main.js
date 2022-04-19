@@ -50,6 +50,15 @@ const appData = {
     appData.addServicec();
     appData.addPrices();
     appData.showResult();
+    appData.reset();
+  },
+  reset: function () {
+    if (appData.count.length !== 0 && screens !== 0) {
+      appData.count.length = 0;
+      appData.screens.length = 0;
+      appData.servicePricesPercent = 0;
+      appData.servicePricesNumber = 0;
+    }
   },
   validate: function () {
     screens = document.querySelectorAll('.screen');
@@ -101,6 +110,8 @@ const appData = {
       appData.count.push({
         amount: +input.value
       });
+      console.log(appData.screens);
+      console.log(appData.count);
     });
   },
   addServicec: function () {
@@ -129,25 +140,51 @@ const appData = {
     plusButton.before(cloneScreen);
   },
   addPrices: function () {
-    for (let screen of appData.screens) {
-      appData.screenPrice += +screen.price;
+    if (total.value === '0') {
+      for (let screen of appData.screens) {
+        appData.screenPrice += +screen.price;
+      }
+    } else {
+      appData.screenPrice = 0;
+      for (let screen of appData.screens) {
+        appData.screenPrice += +screen.price;
+      }
     }
 
-    for (let count of appData.count) {
-      appData.numberScreens += +count.amount;
+    if (totalCount.value === '0') {
+      for (let count of appData.count) {
+        appData.numberScreens += +count.amount;
+      }
+    } else {
+      appData.numberScreens = 0;
+      for (let count of appData.count) {
+        appData.numberScreens += +count.amount;
+      }
     }
 
-    for (let key in appData.servicesNumber) {
-      appData.servicePricesNumber += appData.servicesNumber[key];
-    }
+    if (totalCountOther.value === '0') {
+      for (let key in appData.servicesNumber) {
+        appData.servicePricesNumber += appData.servicesNumber[key];
+      }
 
-    for (let key in appData.servicesPercent) {
-      appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
-    }
+      for (let key in appData.servicesPercent) {
+        appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
+      }
+    } else {
+      totalCountOther.value = 0;
+      for (let key in appData.servicesNumber) {
+        appData.servicePricesNumber += appData.servicesNumber[key];
+      }
 
+      for (let key in appData.servicesPercent) {
+        appData.servicePricesPercent += appData.screenPrice * (appData.servicesPercent[key] / 100);
+      }
+    }
     appData.fullPrice = appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
 
     appData.servicePercentPrice = Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)));
   },
+
 };
 appData.init();
+console.log(appData.count);
