@@ -4,7 +4,11 @@ const headerInput = document.querySelector('.header-input');
 const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
+
+
 const toDoData = [];
+
+
 
 
 todoControl.addEventListener('submit', function (e) {
@@ -43,14 +47,20 @@ const render = function () {
       '<button class = "todo-complete"> </button>' +
       '</div>';
 
+
     if (item.complited) {
       todoCompleted.append(li);
     } else {
       todoList.append(li);
     }
+    localStorage.setItem('todo', JSON.stringify(toDoData));
+    const arr = JSON.parse(localStorage.getItem("toDoData"));
+    console.log(arr);
+
     li.querySelector('.todo-complete').addEventListener('click', function () {
       item.complited = !item.complited;
       render();
+
     });
     li.querySelector('.todo-remove').addEventListener('click', function () {
       toDoData.splice(index, 1);
