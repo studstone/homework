@@ -182,3 +182,5 @@ const appData = {
   },
 
 };
+
+appData.init();
