@@ -44,8 +44,8 @@ const appData = {
       this.disabledButton();
     });
     plusButton.addEventListener('click', this.addScrinBlock);
-    input.addEventListener('input', this.loger);
-    resetBtn.addEventListener('click', this.unReset);
+    input.addEventListener('input', this.loger.bind(this));
+    resetBtn.addEventListener('click', this.unReset.bind(this));
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -79,7 +79,7 @@ const appData = {
   },
   loger: function (event) {
     span.textContent = event.target.value;
-    appData.rollback = +event.target.value;
+    this.rollback = +event.target.value;
   },
   showResult: function () {
     total.value = this.screenPrice;
@@ -204,12 +204,12 @@ const appData = {
     });
   },
   unReset: function () {
-    appData.clearValue();
-    appData.deleteAttributeDisabled();
-    appData.deleteStyle();
-    appData.unChecking();
-    appData.deleteScrinBlock();
-    appData.init();
+    this.clearValue();
+    this.deleteAttributeDisabled();
+    this.deleteStyle();
+    this.unChecking();
+    this.deleteScrinBlock();
+    this.init();
   }
 };
 
